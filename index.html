@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CelMarket · Micro marketplace de celulares</title>
+  <link rel="stylesheet" href="stiles.css">
+</head>
+<body>
+  <a class="skip-link" href="#catalogo">Ir al catálogo</a>
+
+  <!-- ===== ENCABEZADO ===== -->
+  <header class="encabezado">
+    <div class="encabezado__fila">
+      <h1 class="logo">CelMarket</h1>
+      <button type="button" class="btn btn--secundario" id="btn-carrito"
+              aria-expanded="false" aria-controls="carrito">
+        Carrito <span class="badge" id="contador-carrito" aria-live="polite">0</span>
+      </button>
+    </div>
+    <div class="buscador">
+      <label for="buscar" class="sr-only">Buscar por nombre o procesador</label>
+      <input type="search" id="buscar" placeholder="Buscar por nombre o procesador…" autocomplete="off">
+    </div>
+  </header>
+
+  <div class="contenedor">
+
+    <!-- ===== FILTROS (colapsables en móvil) ===== -->
+    <aside class="filtros" aria-label="Filtros de productos">
+      <details id="panel-filtros" class="filtros__panel">
+        <summary class="filtros__titulo">Filtros</summary>
+
+        <fieldset class="filtros__grupo">
+          <legend>Categoría</legend>
+          <label class="filtros__opcion"><input type="radio" name="categoria" value="todas" checked> Todas</label>
+          <label class="filtros__opcion"><input type="radio" name="categoria" value="Gaming"> Gaming</label>
+          <label class="filtros__opcion"><input type="radio" name="categoria" value="Flagship"> Flagship</label>
+          <label class="filtros__opcion"><input type="radio" name="categoria" value="Gama media"> Gama media</label>
+          <label class="filtros__opcion"><input type="radio" name="categoria" value="Entrada"> Entrada</label>
+        </fieldset>
+
+        <fieldset class="filtros__grupo">
+          <legend>Precio</legend>
+          <label class="filtros__opcion"><input type="radio" name="precio" value="todos" checked> Todos</label>
+          <label class="filtros__opcion"><input type="radio" name="precio" value="0-500"> Hasta US$500</label>
+          <label class="filtros__opcion"><input type="radio" name="precio" value="500-1000"> US$500 a US$1,000</label>
+          <label class="filtros__opcion"><input type="radio" name="precio" value="1000+"> Más de US$1,000</label>
+        </fieldset>
+      </details>
+    </aside>
+
+    <!-- ===== CATÁLOGO ===== -->
+    <main id="catalogo" class="catalogo">
+      <div class="catalogo__barra">
+        <p id="resultados" class="resultados" aria-live="polite"></p>
+        <div class="orden">
+          <label for="orden">Ordenar por</label>
+          <select id="orden">
+            <option value="nombre">Nombre (A–Z)</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="grilla" class="grilla"></div>
+
+      <p id="vacio" class="vacio" hidden>
+        No hay celulares que coincidan con tus filtros. Prueba con otra búsqueda o quita algún filtro.
+      </p>
+    </main>
+  </div>
+
+  <!-- ===== FICHA TÉCNICA (modal nativo: Escape y foco incluidos) ===== -->
+  <dialog id="ficha" class="ficha" aria-labelledby="ficha-titulo">
+    <div class="ficha__contenido" id="ficha-contenido"></div>
+  </dialog>
+
+  <!-- ===== CARRITO (panel lateral) ===== -->
+  <aside id="carrito" class="carrito" aria-labelledby="carrito-titulo" hidden>
+    <div class="carrito__cabecera">
+      <h2 id="carrito-titulo">Tu carrito</h2>
+      <button type="button" class="btn btn--secundario btn--icono" id="cerrar-carrito" aria-label="Cerrar carrito">✕</button>
+    </div>
+
+    <p id="carrito-vacio" class="carrito__vacio">Tu carrito está vacío.</p>
+    <ul id="lista-carrito" class="carrito__lista"></ul>
+
+    <div class="carrito__pie">
+      <p class="subtotal">Subtotal: <strong id="subtotal">US$0</strong></p>
+      <p id="nota-subtotal" class="nota" hidden></p>
+      <button type="button" class="btn btn--secundario" id="vaciar" disabled>Vaciar carrito</button>
+      <button type="button" class="btn btn--primario" id="comprar" disabled>Comprar</button>
+      <p id="mensaje-compra" class="mensaje" role="status"></p>
+    </div>
+  </aside>
+
+  <footer class="pie">
+    <p>Demostración sin pagos reales. Precios y especificaciones de referencia.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
